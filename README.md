@@ -11,7 +11,7 @@ This repository contains a React Native project that aims to provide a usage exa
 Clone this repository to your local machine using the following command:
 
 ```bash
-git clone https://github.com/your-username/react-native-project.git
+git clone https://github.com/cccaballero/pokedex.git
 ```
 
 ### Step 2
@@ -19,7 +19,7 @@ git clone https://github.com/your-username/react-native-project.git
 Navigate to the project directory:
 
 ```bash
-cd react-native-project
+cd pokedex
 ```
 
 ### Step 3
