@@ -4,7 +4,7 @@ This repository contains a React Native project that aims to provide a usage exa
 
 ## Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+>**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step and that you are using the latest nodejs LTS version (v18.16.x) before proceeding.
 
 ### Step 1
 
@@ -35,7 +35,7 @@ npm install
 Rename (copy and rename) the file `env.template` to `.env`
 
 ```bash
-npm install
+cp env.template .env
 ```
 
 ### Step 4: Start the Metro Server
@@ -71,7 +71,7 @@ Explain the organization of the project's folders and files. For example:
 
 ## Comments
 
-- Followed [Mobile Pokedex App](https://dribbble.com/shots/16833947-Mobile-Pokedex-App-Design-Exploration/attachments/11892526?mode=media) design exploration. Not pixel perfect.
+- Followed [Mobile Pokedex App](https://dribbble.com/shots/16833947-Mobile-Pokedex-App-Design-Exploration/attachments/11892526?mode=media) design exploration. Not pixel perfect .
 - Used Redux Toolkit and Thunk for async operations.
 - The app looks for the environment variable `BASE_URL` as the base URL for api requests, this is useful for setting different environments as production, stage, development, etc.
 - The app uses a styled components approach, with styles defined for each component. In a bigger app using a global approach for styles can be useful for reusing styles between different components.
