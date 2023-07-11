@@ -201,6 +201,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 24,
     fontWeight: 'bold',
+    color: '#5d5e7c',
   },
   dataValueWrapper: {
     flex: 2,
@@ -210,6 +211,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginBottom: 10,
     fontSize: 24,
+    color: '#5d5e7c',
   },
 });
 
