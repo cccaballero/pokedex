@@ -1,5 +1,11 @@
 import React, {useEffect} from 'react';
-import {ActivityIndicator, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {getPokemons} from './homeSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import PokeCard from '../../components/PokeCard';
@@ -9,7 +15,9 @@ import {RootState} from '../../redux/store';
 
 const Home = ({navigation}: {navigation: any}) => {
   const PAGE_LIMIT = 40;
-  const item_list = useSelector((state: RootState) => state.home.pokemonItems.items);
+  const item_list = useSelector(
+    (state: RootState) => state.home.pokemonItems.items,
+  );
   const isLoading = useSelector((state: RootState) => state.home.isLoading);
   const next = useSelector((state: RootState) => state.home.pokemonItems.next);
 
@@ -36,10 +44,8 @@ const Home = ({navigation}: {navigation: any}) => {
 
   const renderHeader = () => {
     return (
-      <View style={{marginBottom: 25}}>
-        <Text style={{fontWeight: 'bold', fontSize: 50, color: '#2e3057'}}>
-          Pokédex
-        </Text>
+      <View style={styles.headerContainer}>
+        <Text style={styles.header}>Pokédex</Text>
       </View>
     );
   };
@@ -66,7 +72,7 @@ const Home = ({navigation}: {navigation: any}) => {
             onPokemonTap={onPokemonTap}
           />
         )}
-        onEndReached={(info)=> {
+        onEndReached={info => {
           // required to avoid duplicate requests
           if (isLoading === false) {
             loadItems();
@@ -82,6 +88,16 @@ const Home = ({navigation}: {navigation: any}) => {
 };
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    marginBottom: 25,
+    paddingLeft: 13,
+    paddingRight: 13,
+  },
+  header: {
+    fontWeight: 'bold',
+    fontSize: 50,
+    color: '#2e3057',
+  },
   container: {
     paddingLeft: 10,
     paddingRight: 10,
