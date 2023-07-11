@@ -10,10 +10,10 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 import {useDispatch, useSelector} from 'react-redux';
-import {getPokemon, getPokemonData, reset} from './pokemonSlice';
+import {getPokemon, reset} from './pokemonSlice';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import PokeCard from '../../components/PokeCard';
-import {RootState} from "../../redux/store";
+import {RootState} from '../../redux/store';
 
 const Pokemon = ({route, navigation}) => {
   const {name, number, apiEndpoint} = route.params;
@@ -64,7 +64,7 @@ const Pokemon = ({route, navigation}) => {
       ) : (
         <ScrollView>
           <View style={styles.pokeCardWrapper}>
-            <PokeCard id={pokemon.id} imageStyle={styles.pokeCardImageStyle} />
+            <PokeCard id={pokemon.id} />
           </View>
           <View style={styles.miniaturesWrapper}>
             <View style={styles.miniature}>
@@ -107,6 +107,8 @@ const Pokemon = ({route, navigation}) => {
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -171,7 +173,7 @@ const styles = StyleSheet.create({
   },
   pokeCardImageStyle: {
     width: '100%',
-    height: 400,
+    height: 'auto',
   },
   miniaturesWrapper: {
     flex: 1,

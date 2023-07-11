@@ -1,15 +1,14 @@
-import {createAsyncThunk, createSelector, createSlice} from '@reduxjs/toolkit';
-import type {PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import pokemonService from '../../services/pokemonService';
 
 export interface PokemonState {
-  id: number | null;
-  order: number | null;
-  name: string | null;
-  weight: number | null;
-  height: number | null;
-  frontImageUrl: string | null;
-  backImageUrl: string | null;
+  id: number;
+  order: number;
+  name: string;
+  weight: number;
+  height: number;
+  frontImageUrl: string;
+  backImageUrl: string;
   isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;
@@ -17,13 +16,13 @@ export interface PokemonState {
 }
 
 const initialState: PokemonState = {
-  id: null,
-  order: null,
-  name: null,
-  weight: null,
-  height: null,
-  frontImageUrl: null,
-  backImageUrl: null,
+  id: 0,
+  order: 0,
+  name: '',
+  weight: 0,
+  height: 0,
+  frontImageUrl: '',
+  backImageUrl: '',
   isLoading: true,
   isSuccess: false,
   isError: false,

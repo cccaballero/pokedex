@@ -1,5 +1,11 @@
-import React, {memo} from 'react';
-import {Image, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import React, {memo, useState} from 'react';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 
 interface PokeCardParams {
   id: number;
@@ -7,7 +13,6 @@ interface PokeCardParams {
   number?: number | null;
   apiEndpoint?: string;
   onPokemonTap?: any;
-  imageStyle?: any;
 }
 
 // PokeCard implemented as a PureComponent for list rendering optimization
@@ -17,8 +22,10 @@ const PokeCard = memo(function PokeCard({
   number = null,
   apiEndpoint = '',
   onPokemonTap = null,
-  imageStyle = {width: '100%', height: 140},
 }: PokeCardParams) {
+  // need to store component width because react native can't handle dimensions form URL loaded images properly
+  const [viewWidth, setViewWidth] = useState(0);
+
   return (
     <View style={styles.container}>
       <TouchableHighlight
@@ -27,9 +34,12 @@ const PokeCard = memo(function PokeCard({
           onPokemonTap(name, number, apiEndpoint);
         }}
         underlayColor="white">
-        <View>
+        <View
+          onLayout={event => {
+            setViewWidth(event.nativeEvent.layout.width);
+          }}>
           <Image
-            style={imageStyle}
+            style={{width: viewWidth, height: viewWidth}}
             source={{
               uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
             }}
