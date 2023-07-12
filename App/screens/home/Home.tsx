@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {
-  ActivityIndicator,
+  ActivityIndicator, Alert,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -20,12 +20,22 @@ const Home = ({navigation}: {navigation: any}) => {
   );
   const isLoading = useSelector((state: RootState) => state.home.isLoading);
   const next = useSelector((state: RootState) => state.home.pokemonItems.next);
+  const isError = useSelector((state: RootState) => state.home.isError);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPokemons({}));
   }, []);
+
+  useEffect(() => {
+    // handle error obtaining pokemon data
+    if (isError) {
+      Alert.alert('Error', 'An error has occurred obtaining Pokemons data.', [
+        {text: 'OK'},
+      ]);
+    }
+  }, [isError]);
 
   const loadItems = () => {
     if (next) {

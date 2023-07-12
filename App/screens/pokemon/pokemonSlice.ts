@@ -13,6 +13,7 @@ export interface PokemonState {
   isSuccess: boolean;
   isError: boolean;
   message: string;
+  specieUrl: string;
 }
 
 const initialState: PokemonState = {
@@ -27,6 +28,7 @@ const initialState: PokemonState = {
   isSuccess: false,
   isError: false,
   message: '',
+  specieUrl: '',
 };
 
 export const pokemonSlice = createSlice({
@@ -46,6 +48,7 @@ export const pokemonSlice = createSlice({
       state.height = action.payload.response_data.height;
       state.frontImageUrl = action.payload.response_data.sprites?.front_default;
       state.backImageUrl = action.payload.response_data.sprites?.back_default;
+      state.specieUrl = action.payload.response_data.species.url;
     },
     rejected: (state, action) => {
       state.isLoading = false;

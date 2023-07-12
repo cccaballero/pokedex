@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {
+  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -14,10 +15,12 @@ import {getPokemon, reset} from './pokemonSlice';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import PokeCard from '../../components/PokeCard';
 import {RootState} from '../../redux/store';
+import Description from '../../components/description/Description';
 
 const Pokemon = ({route, navigation}) => {
   const {name, number, apiEndpoint} = route.params;
   const pokemon = useSelector((state: RootState) => state.pokemon);
+  const isError = useSelector((state: RootState) => state.pokemon.isError);
 
   const dispatch = useDispatch();
 
@@ -27,6 +30,20 @@ const Pokemon = ({route, navigation}) => {
       dispatch(reset());
     };
   }, [apiEndpoint, dispatch]);
+
+  useEffect(() => {
+    // handle error obtaining pokemon data
+    if (isError) {
+      Alert.alert('Error', 'An error has occurred obtaining Pokemon data.', [
+        {
+          text: 'OK',
+          onPress: () => {
+            navigation.goBack();
+          },
+        },
+      ]);
+    }
+  }, [isError]);
 
   return (
     <View style={styles.container}>
@@ -89,7 +106,7 @@ const Pokemon = ({route, navigation}) => {
               <View style={styles.dataLabelWrapper}>
                 <Text style={styles.dataLabel}>Height:</Text>
               </View>
-              <View style={styles.dataValueWrapper}>
+              <View>
                 <Text style={styles.dataValue}>{pokemon.height}</Text>
               </View>
             </View>
@@ -97,18 +114,22 @@ const Pokemon = ({route, navigation}) => {
               <View style={styles.dataLabelWrapper}>
                 <Text style={styles.dataLabel}>Weight:</Text>
               </View>
-              <View style={styles.dataValueWrapper}>
+              <View>
                 <Text style={styles.dataValue}>{pokemon.weight}</Text>
               </View>
             </View>
+          </View>
+          <View style={styles.descriptionWrapper}>
+            <Description
+              specieUrl={pokemon.specieUrl}
+              textStyle={styles.description}
+            />
           </View>
         </ScrollView>
       )}
     </View>
   );
 };
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -171,10 +192,6 @@ const styles = StyleSheet.create({
   pokeCardWrapper: {
     marginHorizontal: 20,
   },
-  pokeCardImageStyle: {
-    width: '100%',
-    height: 'auto',
-  },
   miniaturesWrapper: {
     flex: 1,
     alignItems: 'center',
@@ -196,12 +213,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   dataLabelWrapper: {
-    flex: 1,
+    width: 90,
   },
   dataLabel: {
     textAlign: 'right',
     marginBottom: 10,
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#5d5e7c',
   },
@@ -212,7 +229,14 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginLeft: 10,
     marginBottom: 10,
-    fontSize: 24,
+    fontSize: 20,
+    color: '#5d5e7c',
+  },
+  descriptionWrapper: {
+    marginHorizontal: 20,
+  },
+  description: {
+    fontSize: 20,
     color: '#5d5e7c',
   },
 });

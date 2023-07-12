@@ -45,6 +45,7 @@ export const homeSlice = createSlice({
       );
       state.pokemonItems.next = action.payload.response_data.next;
       state.pokemonItems.previous = action.payload.response_data.previous;
+      state.isError = false;
     },
     rejected: (state, action) => {
       state.isLoading = false;

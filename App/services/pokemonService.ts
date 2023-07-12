@@ -9,9 +9,6 @@ const getPokemons = (data: any) => {
     .then(response => response.json())
     .then(json => {
       return json;
-    })
-    .catch(error => {
-      console.error(error);
     });
 };
 
@@ -20,15 +17,21 @@ const getPokemon = (url: string) => {
     .then(response => response.json())
     .then(json => {
       return json;
-    })
-    .catch(error => {
-      console.error(error);
+    });
+};
+
+const getDescription = (url: string) => {
+  return fetch(url)
+    .then(response => response.json())
+    .then(json => {
+      return json;
     });
 };
 
 const pokemonService = {
   getPokemons,
   getPokemon,
+  getDescription,
 };
 
 export default pokemonService;
