@@ -38,7 +38,7 @@ Rename (copy and rename) the file `env.template` to `.env`
 cp env.template .env
 ```
 
-### Step 4: Start the Metro Server
+### Step 5: Start the Metro Server
 
 First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
 
@@ -48,18 +48,15 @@ To start Metro, run the following command from the _root_ of your React Native p
 npm start
 ```
 
-### Step 5: Start your Application
+### Step 6: Start the Application
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-#### For Android
+Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start the _Android_ app:
 
 ```bash
 npm run android
 ```
-## Folder Structure
 
-Explain the organization of the project's folders and files. For example:
+## Folder Structure
 
 - /App: Contains the source code of the React Native application.
    - /components: Includes reusable UI components.
@@ -71,9 +68,10 @@ Explain the organization of the project's folders and files. For example:
 
 ## Comments
 
-- Followed [Mobile Pokedex App](https://dribbble.com/shots/16833947-Mobile-Pokedex-App-Design-Exploration/attachments/11892526?mode=media) design exploration. Not pixel perfect .
+- Followed [Mobile Pokedex App](https://dribbble.com/shots/16833947-Mobile-Pokedex-App-Design-Exploration/attachments/11892526?mode=media) design exploration. Not pixel perfect, I only have a reference image and I would need to include more data, so I would take more time.
 - Used Redux Toolkit and Thunk for async operations.
 - The app looks for the environment variable `BASE_URL` as the base URL for api requests, this is useful for setting different environments as production, stage, development, etc.
 - The app uses a styled components approach, with styles defined for each component. In a bigger app using a global approach for styles can be useful for reusing styles between different components.
-- Typescript types are a little messy. Well, not messy, but a couple of types definitions are missing like routing or Thunk actions.
+- A couple of types definitions are missing like routing or Thunk actions.
+- The PokeAPI API does not provides id values in its `pokemon` endpoint, only provides names and a URL. To avoid making extra requests to be able to show the images on the list, I decided to obtain the ID parsing the URL that it provides. Normally it is not necessary to resort to this type of hack because the API provides an identifier.
 - The PokeAPI API does not have an endpoint to perform searches, it would be possible to implement a search using the `pokemon/pokemon_name` endpoint to search for exact matches in the name of the Pokemon, or even, taking into account that there are little more than 1000 records, it is possible to obtain them all and filter.
