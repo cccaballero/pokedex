@@ -47,7 +47,6 @@ const PokeCard = memo(function PokeCard({
           <Image
             style={{width: viewWidth, height: viewWidth, alignSelf: 'center'}}
             onError={() => {
-              console.log('akakak');
               setImageError(true);
             }}
             source={

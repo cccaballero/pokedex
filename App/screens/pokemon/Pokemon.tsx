@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Alert,
   Image,
@@ -21,6 +21,10 @@ const Pokemon = ({route, navigation}) => {
   const {name, number, apiEndpoint} = route.params;
   const pokemon = useSelector((state: RootState) => state.pokemon);
   const isError = useSelector((state: RootState) => state.pokemon.isError);
+  const [frontImageError, setFrontImageError] = useState(false);
+  const [backImageError, setBackImageError] = useState(false);
+  const fallbackImage =
+    'https://fakeimg.pl/500x500/c4e3d4,128/000,255?text=No%20Image';
 
   const dispatch = useDispatch();
 
@@ -87,17 +91,39 @@ const Pokemon = ({route, navigation}) => {
             <View style={styles.miniature}>
               <Image
                 style={styles.miniatureImage}
-                source={{
-                  uri: pokemon.frontImageUrl,
+                onError={() => {
+                  setFrontImageError(true);
                 }}
+                source={
+                  !frontImageError
+                    ? {
+                        uri:
+                          pokemon.frontImageUrl ||
+                          'http://nonexistentURL.none.image.jpg',
+                      }
+                    : {
+                        uri: fallbackImage,
+                      }
+                }
               />
             </View>
             <View style={styles.miniature}>
               <Image
                 style={styles.miniatureImage}
-                source={{
-                  uri: pokemon.backImageUrl,
+                onError={() => {
+                  setBackImageError(true);
                 }}
+                source={
+                  !backImageError
+                    ? {
+                        uri:
+                          pokemon.backImageUrl ||
+                          'http://nonexistentURL.none.image.jpg',
+                      }
+                    : {
+                        uri: fallbackImage,
+                      }
+                }
               />
             </View>
           </View>
