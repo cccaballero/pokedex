@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {
   ActivityIndicator, Alert,
   SafeAreaView,
@@ -48,9 +48,13 @@ const Home = ({navigation}: {navigation: any}) => {
     }
   };
 
-  const onPokemonTap = (name: string, number: number, apiEndpoint: string) => {
-    navigation.navigate('Pokemon', {name, number, apiEndpoint});
-  };
+
+  const onPokemonTap = useCallback(
+    (name: string, number: number, apiEndpoint: string) => {
+      navigation.navigate('Pokemon', {name, number, apiEndpoint});
+    },
+    [navigation],
+  );
 
   const renderHeader = () => {
     return (
@@ -80,6 +84,7 @@ const Home = ({navigation}: {navigation: any}) => {
             number={parseInt(getIdFromUrl(rowData.item.url), 10)}
             apiEndpoint={rowData.item.url}
             onPokemonTap={onPokemonTap}
+            width={140}
           />
         )}
         onEndReached={info => {
