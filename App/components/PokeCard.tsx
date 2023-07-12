@@ -24,6 +24,9 @@ const PokeCard = memo(function PokeCard({
 }: PokeCardParams) {
   // need to store component width because react native can't handle dimensions form URL loaded images properly
   const [viewWidth, setViewWidth] = useState(width);
+  const [imageError, setImageError] = useState(false);
+  const fallbackImage =
+    'https://fakeimg.pl/500x500/c4e3d4,128/000,255?text=No%20Image';
 
   return (
     <View style={styles.container}>
@@ -43,9 +46,19 @@ const PokeCard = memo(function PokeCard({
           }>
           <Image
             style={{width: viewWidth, height: viewWidth, alignSelf: 'center'}}
-            source={{
-              uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+            onError={() => {
+              console.log('akakak');
+              setImageError(true);
             }}
+            source={
+              !imageError
+                ? {
+                    uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+                  }
+                : {
+                    uri: fallbackImage,
+                  }
+            }
           />
           {name && <Text style={styles.title}>{name}</Text>}
           {number && (
