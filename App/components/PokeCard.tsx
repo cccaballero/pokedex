@@ -11,8 +11,8 @@ interface PokeCardParams {
 }
 
 // PokeCard implemented as a PureComponent for list rendering optimization.
-// width parameter required for optimizing big infinite scroll list rendering with URL loaded images
-// list images uses fixed sizes because by increasing the size of the screen the number of cards is
+// width parameter required for optimizing big infinite scroll list rendering with URL loaded images.
+// List images uses fixed sizes because by increasing the size of the screen the number of cards is
 // increased and not the size of them
 const PokeCard = memo(function PokeCard({
   id,
